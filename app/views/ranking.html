@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th></th>
-        <th>Usuario</th>
+        <th style="width: 120px;">Usuario</th>
         <th></th>
         <th>Acerca de</th>
       </tr>
@@ -13,9 +13,9 @@
         <td colspan="4">No hay recorridos disponibles para calcular el ranking.</td>
       </tr>
       <tr ng-repeat="user in ranking">
-        <td class="vert-align">{{user.rank}}</td>
+        <td class="vert-align justify_center">{{user.rank}}</td>
         <td class="vert-align"><img class="avatar" ng-src="{{avatars_path + user.avatar}}" ng-show="user.avatar" /></td>
-        <td class="vert-align"><a href="#/profiles/{{user.id}}">{{user.id}}</a></td>
+        <td class="vert-align justify_left"><a href="#/profiles/{{user.id}}">{{user.id}}</a></td>
         <td class="vert-align">{{user.about}}</td>
       </tr>        
     </tbody>

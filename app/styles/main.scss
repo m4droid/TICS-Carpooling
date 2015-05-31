@@ -1,0 +1,256 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+$fa-font-path: "/bower_components/font-awesome/fonts";
+@import "font-awesome/scss/font-awesome.scss";
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 20px 0 0 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+
+  p + h4 {
+    margin-top: 28px;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+.header {
+  .greetings {
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+  }
+}
+
+.project_name {
+  & > a, a:hover, a.selected {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.justify_center {
+  text-align: center;
+}
+
+.justify_right {
+  text-align: right;
+}
+
+
+.form_login {
+  max-width: 300px;
+  margin: 0 auto 30px;
+}
+
+#form_profile_avatar_img {
+  width: 100px;
+  height: 100px;
+}
+
+.form_profile_no_input {
+}
+
+.form_new_journey {
+  margin-bottom: 40px;
+}
+
+.journey_list {
+  .day_of_week {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    & > li {
+      display: inline-block;
+      background-color: #eee;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      font-size: 0.8em;
+      line-height: 25px;
+
+      &.selected {
+        background-color: #b4d455;
+      }
+    }
+  }
+
+  .music_styles {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    & > li {
+      display: inline-block;
+      background-color: #eee;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      font-size: 0.8em;
+      line-height: 25px;
+
+      &.rock {
+        background-color: #3F51B5;
+        color: white;
+      }
+      &.metal {
+        background-color: #000000;
+        color: white;
+      }
+      &.pop {
+        background-color: #E91E63;
+        color: white;
+      }
+      &.electronic {
+        background-color: #AA00FF;
+        color: white;
+      }
+      &.hiphop {
+        background-color: #FF6F00;
+        color: white;
+      }
+      &.funk {
+        background-color: #AEEA00;
+        color: black;
+      }
+    }
+  }
+
+  .passengers {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.table tbody > tr > td.vert-align {
+  vertical-align: middle;
+}
+
+.section_title {
+  margin: 20px auto;
+}
+
+.why_carpooling {
+  p {
+    text-align: justify;
+  }
+}
+
+#profile_form {
+  .form_input_file {
+    width: 100%;
+  }
+
+  .form_col_justify_right {
+
+    @media screen and (min-width: 768px) {
+      text-align: right;
+    }
+  }
+
+  .control_label_required {
+    @extend .control-label;
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+
+  .control_label_validation {
+    @media screen and (max-width: 767px) {
+      margin-bottom: 5px;
+    }
+
+    @media screen and (min-width: 768px) {
+      height: 0.8em;
+    }
+    font-size: 0.8em;
+
+    & > .required {
+      color: #aaa;
+    }
+
+    & > .error {
+      color: #d00;
+    }
+  }
+
+  .radio-inline {
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="alerts" ng-show="alerts.length > 0">
+    <div class="alert alert-{{alert.type}}" role="alert" ng-repeat="alert in alerts">{{alert.text}}</div>
+  </div>
+</div>
+
+<div class="container">
+  <form class="form_login justify_center">
+    <div class="form-group">
+      <input ng-model="username" type="text" class="form-control" id="form_login_username" placeholder="Nombre de usuario">
+    </div>
+    <div class="form-group">
+      <input ng-model="password" type="password" class="form-control" id="form_login_password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-success" ng-click="form_login_submit()">Log in</button>
+  </form>
+</div>

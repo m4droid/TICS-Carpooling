@@ -1,0 +1,91 @@
+<not-logged-in ng-show="my_journeys && ! is_user_logged_in()"></not-logged-in>
+
+<div class="container">
+  <div class="alerts" ng-show="alerts.length > 0">
+    <div class="alert alert-{{alert.type}}" role="alert" ng-repeat="alert in alerts">{{alert.text}}</div>
+  </div>
+</div>
+
+<div class="container" ng-show="my_journeys && is_user_logged_in()">
+  <h3 class="section_title justify_center">Publicar nuevo recorrido</h3>
+  <form class="form-horizontal form_new_journey" name="form_new_journey">
+      <div class="form-group">
+        <label for="form_journey_route" class="col-sm-3 control-label">Ruta*</label>
+        <div class="col-sm-9">
+          <input id="form_journey_route" class="form-control" type="text" ng-model="new_journey.route" placeholder="e.g. Desde avenida XYZ hacia Beauchef" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form_journey_time" class="col-sm-3 control-label">Horario*</label>
+        <div class="col-sm-9">
+          <timepicker id="form_journey_time" ng-model="new_journey.time" show-meridian="false"></timepicker>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form_journey_days" class="col-sm-3 control-label">Días de la semana*</label>
+        <div class="col-sm-9">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_1" ng-model="new_journey.days_of_week[1]"> Lunes
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_2" ng-model="new_journey.days_of_week[2]"> Martes
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_3" ng-model="new_journey.days_of_week[3]"> Miércoles
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_4" ng-model="new_journey.days_of_week[4]"> Jueves
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_5" ng-model="new_journey.days_of_week[5]"> Viernes
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_6" ng-model="new_journey.days_of_week[6]"> Sábado
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_day_7" ng-model="new_journey.days_of_week[7]"> Domingo
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form_journey_seats" class="col-sm-3 control-label">Cupos*</label>
+        <div class="col-sm-9">
+          <input id="form_journey_seats" class="form-control" type="number" min="1" ng-model="new_journey.seats" placeholder="e.g. 3" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form_journey_music_styles" class="col-sm-3 control-label">Estilos musicales*</label>
+        <div class="col-sm-9">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_music_style_rock" ng-model="new_journey.music_styles['rock']"> Rock
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_music_style_metal" ng-model="new_journey.music_styles['metal']"> Metal
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_music_style_pop" ng-model="new_journey.music_styles['pop']"> Pop
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_music_style_electronic" ng-model="new_journey.music_styles['electronic']"> Electrónica
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_music_style_hiphop" ng-model="new_journey.music_styles['hiphop']"> Hip hop
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="form_journey_music_style_funk" ng-model="new_journey.music_styles['funk']"> Funk
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12 justify_center">
+          <button type="submit" class="btn btn-primary" ng-click="form_journey_create()">Publicar</button>
+        </div>
+      </div>
+    </form>
+</div>
+
+<div class="container">
+  <h3 class="section_title justify_center">{{journeys_title}}</h3>
+
+  <journeys-list filter-by="current_session_filter" current-user="current_user_data.id"></journeys-list>
+</div>

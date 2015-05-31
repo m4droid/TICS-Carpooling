@@ -1,0 +1,5 @@
+<div class="container">
+  <div class="alerts" ng-show="global_alerts.length > 0">
+    <div class="alert alert-{{alert.type}}" role="alert" ng-repeat="alert in global_alerts">{{alert.text}}</div>
+  </div>
+</div>

@@ -1,0 +1,162 @@
+<not-logged-in ng-hide="is_user_logged_in()"></not-logged-in>
+
+<div class="container">
+  <div class="alerts" ng-show="alerts.length > 0">
+    <div class="alert alert-{{alert.type}}" role="alert" ng-repeat="alert in alerts">{{alert.text}}</div>
+  </div>
+</div>
+
+<div class="container" ng-show="is_user_logged_in()">
+  <form id="profile_form" name="profile_form" class="form-horizontal">
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_username" class="control_label_required">Username</label>
+        <div class="control_label_validation" ng-show="is_new_profile">
+          <div class="required" ng-show="profile_form.id.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.id.$error.minlength">3 caracteres mínimo</div>
+          <div class="error" ng-show="profile_form.id.$error.maxlength">32 caracteres mínimo</div>
+          <div class="error" ng-show="profile_form.id.$error.pattern">Sólo caracteres alfanuméricos</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="is_new_profile">{{profile_user.id}}</div>
+        <input id="form_profile_username" class="form-control" type="text" placeholder="juan.perez" name="id" maxlength="32" ng-model="profile_user.id" ng-show="is_new_profile" ng-required="true" ng-minlength="3" ng-maxlength="32" ng-pattern="/^[a-z0-9]+$/i" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_email" class="control_label_required">Email</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.email.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.email.$error.email">Dirección inválida</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.email}}</div>
+        <input id="form_profile_email" class="form-control" type="email" name="email" ng-model="profile_user.email" placeholder="juan@perez.com" ng-show="profile_user_id == current_session.user_id" ng-required="true" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_password" class="control_label_required">Password</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.password.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.password.$error.minlength">Mínimo 8 caracteres</div>
+          <div class="error" ng-show="profile_form.password.$error.maxlength">Máximo 16 caracteres</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.password}}</div>
+        <input id="form_profile_password" class="form-control" type="password" maxlength="16" name="password" ng-model="profile_user.password" ng-show="profile_user_id == current_session.user_id" ng-required="is_new_profile" ng-minlength="8" ng-maxlength="16" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_phone_number" class="control_label_required">Número de teléfono</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.phone_number.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.phone_number.$error.minlength">8 dígitos mínimo</div>
+          <div class="error" ng-show="profile_form.phone_number.$error.pattern">Número inválido</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.phone_number}}</div>
+        <input id="form_profile_phone_number" class="form-control" type="tel" name="phone_number" minlength="12" ng-model="profile_user.phone_number" placeholder="+56971234567" ng-show="profile_user_id == current_session.user_id" ng-required="true" ng-minlength="8" ng-pattern="/^\+[0-9]{11,}$/i">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_first_name" class="control_label_required">Nombre</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.first_name.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.first_name.$error.minlength">Mínimo 3 caracteres</div>
+          <div class="error" ng-show="profile_form.first_name.$error.maxlength">Máximo 32 caracteres</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.first_name}}</div>
+        <input id="form_profile_first_name" class="form-control" type="text" placeholder="Juan" minlength="3" maxlength="32" name="first_name" ng-model="profile_user.first_name" ng-show="profile_user_id == current_session.user_id" ng-required="true" ng-minlength="3" ng-maxlength="32" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_last_name" class="control_label_required">Apellido</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.last_name.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.last_name.$error.minlength">Mínimo 3 caracteres</div>
+          <div class="error" ng-show="profile_form.last_name.$error.maxlength">Máximo 32 caracteres</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.last_name}}</div>
+        <input id="form_profile_last_name" class="form-control" type="text" placeholder="Pérez" name="last_name" ng-model="profile_user.last_name" ng-show="profile_user_id == current_session.user_id" ng-required="true" ng-minlength="3" ng-maxlength="32" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_sex" class="control_label_required">Sexo</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="! profile_user.sex">Requerido</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.sex}}</div>
+        <label class="radio-inline" ng-show="profile_user_id == current_session.user_id">
+          <input type="radio" ng-model="profile_user.sex" id="form_profile_sex_m" value="M" ng-required="! profile_user.sex"> Masculino
+        </label>
+        <label class="radio-inline" ng-show="profile_user_id == current_session.user_id">
+          <input type="radio" ng-model="profile_user.sex" id="form_profile_sex_f" value="F" ng-required="! profile_user.sex"> Femenino
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_dob" class="control_label_required">Fecha de nacimiento</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.dob.$error.required">Requerido</div>
+          <div class="error" ng-show="profile_form.dob.$error.date">Fecha inválida</div>
+          <div class="error" ng-show="profile_form.dob.$error.maxdate">asdf</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.dob | date : 'dd-MM-yyyy'}}</div>
+        <p class="input-group" ng-show="profile_user_id == current_session.user_id">
+          <input id="form_profile_dob" class="form-control" name="dob" ng-model="profile_user.dob" ng-required="true" ng-show="profile_user_id == current_session.user_id" datepicker-popup="dd-MM-yyyy" max-date="max_date" show-weeks="false" show-button-bar="false" is-open="opened" placeholder="{{max_date.format('DD-MM-YYYY')}}. Debes tener al menos 18 años." />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_dob" class="control_label_required">Avatar</label>
+        <div class="control_label_validation">
+          <div class="required" ng-hide="profile_user.avatar">Requerido</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <img id="form_profile_avatar_img" ng-src="{{profile_user.avatar}}" ng-show="profile_user.avatar" />
+        <input id="form_profile_avatar" class="form_input_file" type="file" accept="image/gif,image/jpeg,image/png" placeholder="Avatar" onchange="angular.element(this).scope().avatar_changed(this)" name="avatar" ng-show="profile_user_id == current_session.user_id" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3 form_col_justify_right">
+        <label for="form_profile_dob" class="control_label_required">Acerca de ti</label>
+        <div class="control_label_validation">
+          <div class="required" ng-show="profile_form.about.$error.required">Requerido</div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.about}}</div>
+        <textarea id="form_profile_about" class="form-control" type="text" maxlength="140" placeholder="Texto de hasta 140 caracteres" name="about" ng-model="profile_user.about" ng-show="profile_user_id == current_session.user_id" ng-required="true"></textarea>
+      </div>
+    </div>
+    <div class="form-group" ng-show="profile_user_id == current_session.user_id">
+      <div class="col-sm-12 justify_center">
+        <button type="submit" class="btn btn-primary" ng-click="form_profile_send()" ng-hide="is_new_profile" ng-disabled="profile_form.$invalid">Actualizar</button>
+        <button type="submit" class="btn btn-primary" ng-click="form_profile_send()" ng-show="is_new_profile" ng-disabled="profile_form.$invalid">Registrar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+<div class="table-responsive journey_list">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Ruta</th>
+        <th class="justify_center">Horario</th>
+        <th>Días de la semana</th>
+        <th class="justify_center">Cupos</th>
+        <th>Estilos musicales</th>
+        <th>Pasajeros</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="justify_center" ng-hide="(journeys | filter: filterBy).length > 0">
+        <td colspan="9">No hay recorridos disponibles</td>
+      </tr>
+      <tr ng-repeat="journey in filtered = (journeys | filter: filterBy)">
+        <td class="vert-align">{{journey.id}}</td>
+        <td class="vert-align"><a href="#/profiles/{{journey.user_id}}">{{journey.user_id}}</a></td>
+        <td class="vert-align">{{journey.route}}</td>
+        <td class="vert-align justify_center">{{journey.time}}</td>
+        <td class="vert-align">
+          <ul class="day_of_week">
+            <li tooltip-placement="top" tooltip="{{day.text}}" ng-repeat="day in days" ng-class="{'selected': journey.days_of_week.indexOf(day.number) >= 0}">{{day.label}}</li>
+          </ul>
+        </td>
+        <td class="vert-align justify_center">{{journey.seats - journey.passengers.length}} / {{journey.seats}}</td>
+        <td class="vert-align">
+          <ul class="music_styles">
+            <li tooltip-placement="top" tooltip="{{style.text}}" class="{{style.key}}" ng-repeat="style in music_styles" ng-hide="journey.music_styles.indexOf(style.key) == -1">{{style.label}}</li>
+          </ul>
+        </td>
+        <td class="vert-align">
+          <div ng-hide="journey.passengers.length > 0">Ninguno</div>
+          <ul class="passengers" ng-show="journey.passengers.length > 0">
+            <li ng-repeat="passenger in journey.passengers"><a href="#/profiles/{{passenger}}">{{passenger}}</a></li>
+          </ul>          
+        </td>
+        <td class="vert-align">
+          <button class="btn btn-primary btn-xs" ng-click="join_journey(journey.id)" ng-hide="! currentUser || journey.user_id == currentUser || journey.passengers.indexOf(currentUser) >= 0 && journey.passengers.length < journey.seats">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+          <button class="btn btn-primary btn-xs" ng-click="leave_journey(journey.id)" ng-hide="! currentUser || journey.user_id == currentUser || journey.passengers.indexOf(currentUser) < 0">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

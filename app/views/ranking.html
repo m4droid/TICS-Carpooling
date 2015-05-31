@@ -9,6 +9,9 @@
       </tr>
     </thead>
     <tbody>
+      <tr class="justify_center" ng-hide="ranking.length > 0">
+        <td colspan="4">No hay recorridos disponibles para calcular el ranking.</td>
+      </tr>
       <tr ng-repeat="user in ranking">
         <td class="vert-align">{{user.rank}}</td>
         <td class="vert-align"><img class="avatar" ng-src="{{avatars_path + user.avatar}}" ng-show="user.avatar" /></td>

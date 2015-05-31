@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Usuario</th>
+        <th></th>
+        <th>Acerca de</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in ranking">
+        <td class="vert-align">{{user.rank}}</td>
+        <td class="vert-align"><img class="avatar" ng-src="{{avatars_path + user.avatar}}" ng-show="user.avatar" /></td>
+        <td class="vert-align"><a href="#/profiles/{{user.id}}">{{user.id}}</a></td>
+        <td class="vert-align">{{user.about}}</td>
+      </tr>        
+    </tbody>
+  </table>
+
+  <p>Este ranking se basa en la cantidad de recorridos realizados y cupos totales ofrecidos por una semana por cada uno de los usuarios del sistema.</p>
+</div>

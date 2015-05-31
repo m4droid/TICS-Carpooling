@@ -43,6 +43,10 @@ angular
         title: 'Mi perfil'
         templateUrl: 'views/profile.html'
         controller: 'ProfileCtrl'
+      .when '/top3',
+        title: 'Top 3'
+        templateUrl: 'views/ranking.html'
+        controller: 'RankingCtrl'
       .otherwise
         redirectTo: '/journeys'
   .config (localStorageServiceProvider) ->

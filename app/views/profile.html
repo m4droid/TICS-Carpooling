@@ -136,7 +136,7 @@
         </div>
       </div>
       <div class="col-sm-9">
-        <img id="form_profile_avatar_img" ng-src="{{profile_user.avatar}}" ng-show="profile_user.avatar" />
+        <img class="avatar" ng-src="{{profile_user.avatar}}" ng-show="profile_user.avatar" />
         <input id="form_profile_avatar" class="form_input_file" type="file" accept="image/gif,image/jpeg,image/png" placeholder="Avatar" onchange="angular.element(this).scope().avatar_changed(this)" name="avatar" ng-show="profile_user_id == current_session.user_id" />
       </div>
     </div>

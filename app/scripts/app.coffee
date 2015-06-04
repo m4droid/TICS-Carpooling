@@ -56,4 +56,4 @@ angular
   .run ($location, $rootScope) ->
     $rootScope.$on '$routeChangeSuccess', (event, current, previous) ->
       if current.$$route?
-        $rootScope.title = current.$$route.title;
+        $rootScope.title = current.$$route.title

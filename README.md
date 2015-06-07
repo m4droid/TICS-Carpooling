@@ -4,13 +4,15 @@ Carpooling
 Este projecto fue creado para el curso IN3501: Tecnologías de Información y Comunicaciones para la Gestión de la Universidad de Chile.
 
 Generado con [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1.
+version 0.11.1 con CoffeeScript.
 
 Para ser visualizado correctamente, el contenido de esta carpeta debe estar en la carpeta raíz del servicio Web dentro de la carpeta 'tarea3grupo23'.
 
 Testeado en XAMPP 5.6.3-0 OSX
 
 #### NOTAS
+* El nombre de la base de datos MySQL es 'tarea3grupo23'
+
 * Los usuarios / contraseñas de prueba son:
   - user / passpass
   - user2 / passpass2

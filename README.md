@@ -15,7 +15,7 @@ Testeado en XAMPP 5.6.3-0 OSX
   - user / passpass
   - user2 / passpass2
 
-* La carpeta backend/avatars debe tener permisos de lectura, escritura y ejecución.
+* La carpeta backend/avatars debe tener permisos de lectura, escritura y ejecución para todos los usuarios (chmod 777)
 
 #### BONUS: Features de Bootstrap utilizados
 

@@ -71,7 +71,7 @@ class Users extends Custom_REST_Controller {
 				'regex' => '/[0-9]{4,}-[0-9]{2}\-[0-9]{2}/i',
 				'check_func' => function ($value) {
 					$date_parts = explode('-', $value);
-					return checkdate($date_parts[2], $date_parts[1], $date_parts[0]);
+					return checkdate($date_parts[1], $date_parts[2], $date_parts[0]);
 				}
 			),
 			'avatar' => array(
@@ -218,7 +218,7 @@ class Users extends Custom_REST_Controller {
 				'regex' => '/[0-9]{4,}-[0-9]{2}\-[0-9]{2}/i',
 				'check_func' => function ($value) {
 					$date_parts = explode('-', $value);
-					return checkdate($date_parts[2], $date_parts[1], $date_parts[0]);
+					return checkdate($date_parts[1], $date_parts[2], $date_parts[0]);
 				}
 			),
 			'avatar' => array(

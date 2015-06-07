@@ -115,13 +115,12 @@
         <div class="control_label_validation">
           <div class="required" ng-show="profile_form.dob.$error.required">Requerido</div>
           <div class="error" ng-show="profile_form.dob.$error.date">Fecha inválida</div>
-          <div class="error" ng-show="profile_form.dob.$error.maxdate">asdf</div>
         </div>
       </div>
       <div class="col-sm-9">
         <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.dob | date : 'dd-MM-yyyy'}}</div>
         <p class="input-group" ng-show="profile_user_id == current_session.user_id">
-          <input id="form_profile_dob" class="form-control" name="dob" ng-model="profile_user.dob" ng-required="true" ng-show="profile_user_id == current_session.user_id" datepicker-popup="dd-MM-yyyy" max-date="max_date" show-weeks="false" show-button-bar="false" is-open="opened" placeholder="{{max_date.format('DD-MM-YYYY')}}. Debes tener al menos 18 años." />
+          <input id="form_profile_dob" class="form-control" name="dob" ng-model="profile_user.dob" ng-required="true" ng-show="profile_user_id == current_session.user_id" datepicker-popup="MM-dd-yyyy" show-weeks="false" show-button-bar="false" is-open="opened" placeholder="{{max_date.format('MM-DD-YYYY')}} (MM-DD-YYYY)." />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>

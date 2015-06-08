@@ -20,8 +20,15 @@ angular
     'ui.bootstrap'
   ]
   .constant "API",
-    url: 'http://localhost/tarea3grupo23/backend'
-  .config ($routeProvider) ->
+    url: 'http://192.168.86.165/tarea3grupo23/backend'
+  .config ($routeProvider, $httpProvider, localStorageServiceProvider) ->
+
+    if not $httpProvider.defaults.headers.get?
+      $httpProvider.defaults.headers.get = {}
+
+    # Avoid IE HTTP caching
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = '0'
+
     $routeProvider
       .when '/why_carpooling',
         title: '¿Por qué?'
@@ -49,8 +56,7 @@ angular
         controller: 'RankingCtrl'
       .otherwise
         redirectTo: '/journeys'
-  .config (localStorageServiceProvider) ->
-    localStorageServiceProvider.setPrefix('carpoolingApp')
+    localStorageServiceProvider.setPrefix 'carpoolingApp'
   .run ($rootScope, $http, AuthService) ->
     AuthService.get_session_id()
   .run ($location, $rootScope) ->

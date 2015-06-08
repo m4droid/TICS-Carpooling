@@ -16,8 +16,10 @@
     <!-- endbuild -->
   </head>
   <body ng-controller="ApplicationCtrl">
-    <!--[if lt IE 10]>
-      <p class="browsehappy">Estas usando un navegador <strong>demasiado viejo</strong>. Por favor <a href="http://browsehappy.com/">actualizalo</a> para mejorar tu experiencia.</p>
+    <!--[if lt IE 11]>
+    <div class="container">
+      <div class="alert alert-danger">Estas usando un navegador <strong>demasiado viejo</strong>. Por favor <a href="http://browsehappy.com/">actualizalo</a> para mejorar tu experiencia.</div>
+    </div>
     <![endif]-->
 
     <div class="container" ng-include src="'views/partials/header.html'"></div>

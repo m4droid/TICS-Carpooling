@@ -13,18 +13,18 @@ class Journeys_Passengers extends Custom_REST_Controller {
 		$journey_id = $this->post('journey_id');
 
 		if (empty($session_data) || empty($session_data['user_id'])) {
-			$this->json_output([array('message' => 'Faltan credenciales de acceso.')], 401);
+			$this->json_output([array('type' => 'danger', 'message' => 'Faltan credenciales de acceso.')], 401);
 			return;
 		}
 
 		if ($journey_id === null) {
-			$this->json_output([array('message' => 'Falta ID del recorrido.')], 400);
+			$this->json_output([array('type' => 'danger', 'message' => 'Falta ID del recorrido.')], 400);
 			return;
 		}
 
 		$user = $this->get_user_from_db($session_data['user_id']);
 		if ($user === null) {
-			$this->json_output([array('message' => 'El usuario no está en el sistema.')], 400);
+			$this->json_output([array('type' => 'danger', 'message' => 'El usuario no está en el sistema.')], 400);
 			return;
 		}
 

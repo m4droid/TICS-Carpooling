@@ -41,6 +41,8 @@ class Sessions extends Custom_REST_Controller {
 	}
 
 	function index_delete() {
+		$this->session_start_from_headers();
+
 		session_unset();
 		session_destroy();
 		$this->output->set_status_header(204);

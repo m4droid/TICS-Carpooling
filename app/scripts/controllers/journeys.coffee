@@ -43,6 +43,9 @@ angular.module 'carpoolingApp'
     $scope.my_journeys = false
     $scope.journeys = []
     if $routeParams.mine == 'mine'
+      if not $scope.is_user_logged_in()
+        $location.path "/"
+
       $scope.my_journeys = true
       $scope.alerts = []
       $scope.new_journey = {
@@ -54,9 +57,5 @@ angular.module 'carpoolingApp'
           (element.user_id == $scope.current_session.user_id or
             element.passengers.indexOf($scope.current_session.user_id) >= 0)
     else
-      $scope.my_journeys = false
       $scope.journeys_title = 'Recorridos'
-
-    if $scope.my_journeys && ! $scope.is_user_logged_in()
-      $location.path "/"
     return

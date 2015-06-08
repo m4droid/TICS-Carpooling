@@ -17,9 +17,9 @@ abstract class Custom_REST_Controller extends REST_Controller {
 		$request_headers = apache_request_headers();
 		if (isset($request_headers['Authorization'])) {
 			$match = null;
-			preg_match("/Token token=([a-z0-9]{26})/i", $request_headers['Authorization'], $match[1]);
-			if (count($match) == 1) {
-				session_id($match[1][1]);
+			preg_match("/Token token=([a-z0-9]{26})/i", $request_headers['Authorization'], $match);
+			if ($match !== null && count($match) == 2) {
+				session_id($match[1]);
 			}
 		}
 		session_start();
@@ -39,7 +39,7 @@ abstract class Custom_REST_Controller extends REST_Controller {
 	}
 
 	function index_options() {
-		$this->output->set_header("Access-Control-Allow-Headers: Authorization, X-Requested-With, accept, content-type");
+		$this->output->set_header("Access-Control-Allow-Headers: Authorization, X-Requested-With, accept, content-type, If-Modified-Since");
 		$this->output->set_header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 		$this->output->set_status_header(200);
 	}

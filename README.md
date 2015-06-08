@@ -8,7 +8,9 @@ version 0.11.1 con CoffeeScript.
 
 Para ser visualizado correctamente, el contenido de esta carpeta debe estar en la carpeta raíz del servicio Web dentro de la carpeta 'tarea3grupo23'.
 
-Testeado en XAMPP 5.6.3-0 OSX
+Testeado en:
+OS X: XAMPP 5.6.3-0 con Chrome y Safari
+Windows 7: XAMPP 5.6.0-0 con Chrome e IE 11
 
 #### NOTAS
 * El nombre de la base de datos MySQL es 'tarea3grupo23'

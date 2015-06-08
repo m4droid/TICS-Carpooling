@@ -39,8 +39,16 @@ angular.module 'carpoolingApp'
       return
     logout: () ->
       $q (resolve, reject) ->
-        $http.delete(API.url + '/sessions')
-          .success (data, status, headers, config) ->
-            Session.destroy()
-            $rootScope.current_session = undefined
-        resolve()
+        if not Session.id?
+          reject()
+
+        $http(
+          method: 'DELETE',
+          url: API.url + '/sessions',
+          headers: {'Authorization': 'Token token=' + Session.id}
+        ).success (data, status, headers, config) ->
+          Session.destroy()
+          $rootScope.current_session = undefined
+          resolve()
+        .error (data, status, headers, config) ->
+          reject()

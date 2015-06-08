@@ -80,6 +80,7 @@ angular.module 'carpoolingApp'
             return
         return
 
+      $scope.journeys = []
       $scope.load_journeys()
       return
     ]

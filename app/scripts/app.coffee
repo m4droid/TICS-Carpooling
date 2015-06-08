@@ -20,7 +20,7 @@ angular
     'ui.bootstrap'
   ]
   .constant "API",
-    url: 'http://192.168.86.165/tarea3grupo23/backend'
+    url: 'http://localhost/tarea3grupo23/backend'
   .config ($routeProvider, $httpProvider, localStorageServiceProvider) ->
 
     if not $httpProvider.defaults.headers.get?

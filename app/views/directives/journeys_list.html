@@ -10,6 +10,8 @@
         <th class="justify_center" ts-criteria="seats|parseInt">Cupos</th>
         <th>Estilos musicales</th>
         <th>Pasajeros</th>
+        <th>Likes</th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -39,12 +41,21 @@
             <li ng-repeat="passenger in journey.passengers"><a href="#/profiles/{{passenger}}">{{passenger}}</a></li>
           </ul>          
         </td>
+        <td class="vert-align justify_center">{{journey.likes.length || 0}}</td>
         <td class="vert-align">
           <button class="btn btn-primary btn-xs" ng-click="join_journey(journey.id)" ng-hide="! currentUser || journey.user_id == currentUser || journey.passengers.indexOf(currentUser) >= 0 && journey.passengers.length < journey.seats">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </button>
           <button class="btn btn-primary btn-xs" ng-click="leave_journey(journey.id)" ng-hide="! currentUser || journey.user_id == currentUser || journey.passengers.indexOf(currentUser) < 0">
             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+          </button>
+        </td>
+        <td class="vert-align">
+          <button class="btn btn-primary btn-xs" ng-click="like_journey(journey.id)" ng-hide="! currentUser || journey.likes.indexOf(currentUser) >= 0">
+            <i class="fa fa-thumbs-up fa_icon" aria-hidden="true"></i>
+          </button>
+          <button class="btn btn-primary btn-xs" ng-click="unlike_journey(journey.id)" ng-hide="! currentUser || journey.likes.indexOf(currentUser) < 0">
+            <i class="fa fa-thumbs-down fa_icon" aria-hidden="true"></i>
           </button>
         </td>
       </tr>

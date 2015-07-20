@@ -73,6 +73,37 @@ angular.module 'carpoolingApp'
           return
         return
 
+      $scope.like_journey = (journey_id) ->
+        AuthService.get_session_id()
+          .then (session_id) ->
+            $http(
+              method: 'POST',
+              url: API.url + '/journeys_likes',
+              headers: {'Authorization': 'Token token=' + session_id},
+              data: {'journey_id': journey_id}
+            ).success((data, status, headers, config) ->
+              $scope.load_journeys()
+              return
+            )
+            return
+          return
+        return
+
+      $scope.unlike_journey = (journey_id) ->
+        AuthService.get_session_id()
+          .then (session_id) ->
+            $http(
+              method: 'DELETE',
+              url: API.url + '/journeys_likes/?journey_id=' + journey_id,
+              headers: {'Authorization': 'Token token=' + session_id},
+            ).success((data, status, headers, config) ->
+              $scope.load_journeys()
+              return
+            )
+            return
+          return
+        return
+
       $scope.load_journeys = () ->
         $http({method: 'GET', url: API.url + '/journeys'})
           .success (data, status, headers, config) ->

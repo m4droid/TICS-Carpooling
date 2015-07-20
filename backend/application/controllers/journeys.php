@@ -27,25 +27,32 @@ class Journeys extends Custom_REST_Controller {
 		$journey_days_sql = 'SELECT day FROM journey_day WHERE journey_id = ?';
 		$journey_music_styles_sql = 'SELECT music_style_id FROM journey_music_style WHERE journey_id = ?';
 		$journey_passengers_sql = 'SELECT user_id FROM journey_passenger WHERE journey_id = ?';
+		$journey_likes_sql = 'SELECT user_id FROM journey_like WHERE journey_id = ?';
 
 		foreach ($query->result_array() as $row) {
 			$row['days_of_week'] = [];
 			$row['music_styles'] = [];
 			$row['passengers'] = [];
+			$row['likes'] = [];
 
-			$journey_days_query = $this->db->query($journey_days_sql, $row['id']);
-			foreach ($journey_days_query->result_array() as $day_row) {
+			$query = $this->db->query($journey_days_sql, $row['id']);
+			foreach ($query->result_array() as $day_row) {
 				$row['days_of_week'][] = intval($day_row['day']);
 			}
 
-			$journey_music_styles_query = $this->db->query($journey_music_styles_sql, $row['id']);
-			foreach ($journey_music_styles_query->result_array() as $music_style_row) {
+			$query = $this->db->query($journey_music_styles_sql, $row['id']);
+			foreach ($query->result_array() as $music_style_row) {
 				$row['music_styles'][] = $music_style_row['music_style_id'];
 			}
 
-			$journey_passengers_query = $this->db->query($journey_passengers_sql, $row['id']);
-			foreach ($journey_passengers_query->result_array() as $passenger_row) {
+			$query = $this->db->query($journey_passengers_sql, $row['id']);
+			foreach ($query->result_array() as $passenger_row) {
 				$row['passengers'][] = $passenger_row['user_id'];
+			}
+
+			$query = $this->db->query($journey_likes_sql, $row['id']);
+			foreach ($query->result_array() as $like_row) {
+				$row['likes'][] = $like_row['user_id'];
 			}
 
 			$journeys[] = $row;

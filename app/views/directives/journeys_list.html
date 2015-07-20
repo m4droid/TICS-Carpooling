@@ -1,13 +1,13 @@
 <div class="table-responsive journey_list">
-  <table class="table">
+  <table class="table" ts-wrapper>
     <thead>
       <tr>
-        <th>ID</th>
+        <th ts-criteria="id|parseInt" ts-default>ID</th>
         <th>Usuario</th>
         <th>Ruta</th>
         <th class="justify_center">Horario</th>
-        <th>Días de la semana</th>
-        <th class="justify_center">Cupos</th>
+        <th ts-criteria="days_of_week.length|parseInt">Días de la semana</th>
+        <th class="justify_center" ts-criteria="seats|parseInt">Cupos</th>
         <th>Estilos musicales</th>
         <th>Pasajeros</th>
         <th></th>
@@ -17,7 +17,7 @@
       <tr class="justify_center" ng-hide="(journeys | filter: filterBy).length > 0">
         <td colspan="9">No hay recorridos disponibles</td>
       </tr>
-      <tr ng-repeat="journey in filtered = (journeys | filter: filterBy)">
+      <tr ng-repeat="journey in filtered = (journeys | filter: filterBy)" ts-repeat>
         <td class="vert-align">{{journey.id}}</td>
         <td class="vert-align"><a href="#/profiles/{{journey.user_id}}">{{journey.user_id}}</a></td>
         <td class="vert-align">{{journey.route}}</td>

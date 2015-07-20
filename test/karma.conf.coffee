@@ -26,6 +26,7 @@ module.exports = (config) ->
       'bower_components/angular-local-storage/dist/angular-local-storage.js'
       'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js'
       'bower_components/momentjs/moment.js'
+      'bower_components/angular-tablesort/js/angular-tablesort.js'
       'bower_components/angular-mocks/angular-mocks.js'
       # endbower
       # bower:coffee

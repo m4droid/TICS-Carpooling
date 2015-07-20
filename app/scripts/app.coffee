@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'LocalStorageModule',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'tableSort'
   ]
   .constant "API",
     url: 'http://localhost/tarea3grupo23/backend'

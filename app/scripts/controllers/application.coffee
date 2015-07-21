@@ -11,7 +11,7 @@ angular.module 'carpoolingApp'
   .controller 'ApplicationCtrl', ($scope, $rootScope, $location, AuthService) ->
     $scope.global_alerts = []
 
-    $scope.is_user_logged_in = () ->
+    $scope.is_user_logged_in = ->
       $scope.current_session? and $scope.current_session.id? and $scope.current_session.user_id?
 
     $scope.login = (username, password) ->
@@ -23,13 +23,18 @@ angular.module 'carpoolingApp'
         , (alerts) ->
           $scope.alerts = alerts
 
-    $scope.logout = () ->
+    $scope.logout = ->
       $scope.global_alerts = []
       AuthService.logout()
         .then (status) ->
           $location.path "/"
           return
 
-    $scope.redirect_to_home = () ->
+    $scope.redirect_to_home = ->
       $location.path "/"
       return
+
+    $scope.user_is_admin = ->
+      $scope.current_user_data? and $scope.current_user_data.type == 'admin'
+
+    AuthService.check_session()

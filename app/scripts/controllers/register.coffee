@@ -34,7 +34,6 @@ angular.module 'carpoolingApp'
 
       $http.post(API.url + '/users', new_profile)
         .success (data, status, headers, config) ->
-          console.log $scope.profile_user.id, $scope.profile_user.password
           $scope.login $scope.profile_user.id, $scope.profile_user.password
           return
         .error (data, status, headers, config) ->

@@ -13,24 +13,32 @@ class Journeys_Passengers extends Custom_REST_Controller {
 		$journey_id = $this->post('journey_id');
 
 		if (empty($session_data) || empty($session_data['user_id'])) {
-			$this->json_output([array('type' => 'danger', 'message' => 'Faltan credenciales de acceso.')], 401);
-			return;
-		}
-
-		if ($journey_id === null) {
-			$this->json_output([array('type' => 'danger', 'message' => 'Falta ID del recorrido.')], 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'Faltan credenciales de acceso.')], 401);
 			return;
 		}
 
 		$user = $this->get_user_from_db($session_data['user_id']);
 		if ($user === null) {
-			$this->json_output([array('type' => 'danger', 'message' => 'El usuario no está en el sistema.')], 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'El usuario no está en el sistema')], 400);
+			return;
+		} else if ($user['type'] == 'admin') {
+			$this->json_output([array('type' => 'danger', 'text' => 'Los administradores no pueden participar de los recorridos')], 403);
+			return;
+		}
+
+		if ($this->is_user_banned($user['id'])) {
+			$this->json_output([array('type' => 'danger', 'text' => 'El usuario fue baneado del sistema')], 400);
+			return;
+		}
+
+		if ($journey_id === null) {
+			$this->json_output([array('type' => 'danger', 'text' => 'Falta ID del recorrido')], 400);
 			return;
 		}
 
 		$query = $this->db->query("SELECT user_id, seats FROM journey WHERE id = ?", array($journey_id));
 		if ($query->num_rows() == 0) {
-			$this->json_output('El recorrido no existe', 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'El recorrido no existe')], 400);
 			return;	
 		}
 
@@ -44,7 +52,7 @@ class Journeys_Passengers extends Custom_REST_Controller {
 		// If all seats are taken
 		$query = $this->db->query("SELECT user_id FROM journey_passenger WHERE journey_id = ?", array($journey_id));
 		if ($query->num_rows() >= $journey['seats']) {
-			$this->json_output('El recorrido esta lleno', 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'El recorrido esta lleno')], 400);
 			return;	
 		}
 
@@ -54,7 +62,7 @@ class Journeys_Passengers extends Custom_REST_Controller {
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === FALSE) {
-			$this->json_output([array('message' => 'No se pudo unir al recorrido')], 500);
+			$this->json_output([array('type' => 'danger', 'text' => 'No se pudo unir al recorrido')], 500);
 		}
 
 		$this->json_output(array(), 201);
@@ -71,24 +79,32 @@ class Journeys_Passengers extends Custom_REST_Controller {
 		$this->json_output(array($journey_id), 201);
 
 		if (empty($session_data) || empty($session_data['user_id'])) {
-			$this->json_output([array('message' => 'Faltan credenciales de acceso.')], 401);
-			return;
-		}
-
-		if ($journey_id === null) {
-			$this->json_output([array('message' => 'Falta ID del recorrido.')], 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'Faltan credenciales de acceso.')], 401);
 			return;
 		}
 
 		$user = $this->get_user_from_db($session_data['user_id']);
 		if ($user === null) {
-			$this->json_output([array('message' => 'El usuario no está en el sistema.')], 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'El usuario no está en el sistema')], 400);
+			return;
+		} else if ($user['type'] == 'admin') {
+			$this->json_output([array('type' => 'danger', 'text' => 'Los administradores no pueden dejar de participar de los recorridos')], 403);
+			return;
+		}
+
+		if ($this->is_user_banned($user['id'])) {
+			$this->json_output([array('type' => 'danger', 'text' => 'El usuario fue baneado del sistema')], 400);
+			return;
+		}
+
+		if ($journey_id === null) {
+			$this->json_output([array('type' => 'danger', 'text' => 'Falta ID del recorrido.')], 400);
 			return;
 		}
 
 		$query = $this->db->query("SELECT user_id FROM journey WHERE id = ?", array($journey_id));
 		if ($query->num_rows() == 0) {
-			$this->json_output('El recorrido no existe', 400);
+			$this->json_output([array('type' => 'danger', 'text' => 'El recorrido no existe')], 400);
 			return;	
 		}
 
@@ -104,7 +120,7 @@ class Journeys_Passengers extends Custom_REST_Controller {
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === FALSE) {
-			$this->json_output([array('message' => 'No se pudo dejar el recorrido')], 500);
+			$this->json_output([array('type' => 'danger', 'text' => 'No se pudo dejar el recorrido')], 500);
 		}
 
 		$this->json_output(array(), 204);

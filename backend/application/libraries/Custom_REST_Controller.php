@@ -50,11 +50,18 @@ abstract class Custom_REST_Controller extends REST_Controller {
 	}
 
 	function get_user_from_db($id) {
+		if (empty($id)) return null;
 		$query = $this->db->query("SELECT * FROM user WHERE id = ?", array($id));
 		if ($query->num_rows() == 0) return null;
 		$user = $query->row_array();
 		unset($user['password']);
 		return $user;
+	}
+
+	function is_user_banned($user_id) {
+		if (empty($user_id)) return false;
+		$query = $this->db->query("SELECT user_id FROM banned_user WHERE user_id = ?", array($user_id));
+		return $query->num_rows() > 0;
 	}
 
 	function is_email_in_db($email) {

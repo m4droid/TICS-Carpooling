@@ -55,6 +55,10 @@ angular
         title: 'Top 3'
         templateUrl: 'views/ranking.html'
         controller: 'RankingCtrl'
+      .when '/users',
+        title: 'Administrar Usuarios'
+        templateUrl: 'views/users.html'
+        controller: 'UsersCtrl'
       .otherwise
         redirectTo: '/journeys'
     localStorageServiceProvider.setPrefix 'carpoolingApp'

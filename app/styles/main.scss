@@ -287,16 +287,9 @@ table {
 
 .showIfLast {
   display: none;
+}
 
-  &:last-child {
-    display: table-row;
-  }
-
-  td {
-    text-align: center;
-  }
-
-  td:after {
-    content: "Sin información";
-  }
+.table_users {
+  max-width: 500px;
+  margin: 0 auto;
 }

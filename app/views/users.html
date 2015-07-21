@@ -1,0 +1,48 @@
+<div id="modal_ban" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_ban">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div ng-show="modal_action">¿Estás seguro de querer banear al usuario '{{modal_ban_user}}'</div>
+        <div ng-hide="modal_action">¿Estás seguro de querer desbanear al usuario '{{modal_ban_user}}'</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="ban_user(modal_ban_user)" ng-show="modal_action">Banear</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="unban_user(modal_ban_user)" ng-hide="modal_action">Desbanear</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <no-admin-rights ng-hide="user_is_admin()"></no-admin-rights>
+
+  <div class="table-responsive table_users" ng-show="user_is_admin()">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Último ingreso</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="justify_center" ng-hide="data.users.length > 0">
+          <td colspan="9">No hay usuarios disponibles</td>
+        </tr>
+        <tr ng-repeat="user in data.users | filter: {type: 'user'}">
+          <td class="vert-align">{{user.id}}</td>
+          <td class="vert-align">{{user.last_login_datetime}}</td>
+          <td class="vert-align">
+            <button class="btn btn-danger btn-xs" ng-click="confirm_ban(true, user.id)" ng-hide="is_user_banned(user.id)" data-toggle="modal" data-target="#modal_ban">
+              <i class="fa fa-thumbs-down fa_icon" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-primary btn-xs" ng-click="confirm_ban(false, user.id)" ng-show="is_user_banned(user.id)" data-toggle="modal" data-target="#modal_ban">
+              <i class="fa fa-thumbs-up fa_icon" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -16,13 +16,11 @@ angular.module 'carpoolingApp'
             resolve Session.create data
             return
           .error (data, status, headers, config) ->
-            reject [
-              'text': 'Usuario/password invalidos',
-              'type': 'danger'
-            ]
+            reject data
             return
         return
-    get_session_id: () ->
+    get_session_id: ->
+      this.check_session()
       $q (resolve, reject) ->
         session_data = localStorageService.cookie.get 'SESSION'
         if session_data?
@@ -32,12 +30,12 @@ angular.module 'carpoolingApp'
           reject()
           return
         return
-    is_authenticated: () ->
+    is_authenticated: ->
       Session.user_id?
-    update_user_data: () ->
+    update_user_data: ->
       Session.save_user_data()
       return
-    logout: () ->
+    logout: ->
       $q (resolve, reject) ->
         if not Session.id?
           reject()
@@ -52,3 +50,14 @@ angular.module 'carpoolingApp'
           resolve()
         .error (data, status, headers, config) ->
           reject()
+    check_session: ->
+      if Session.id?
+        $http(
+          method: 'GET',
+          url: API.url + '/sessions',
+          headers: {'Authorization': 'Token token=' + Session.id}
+        ).success (data, status, headers, config) ->
+          if not data.user_id?
+            Session.destroy()
+            $rootScope.current_session = undefined
+          return

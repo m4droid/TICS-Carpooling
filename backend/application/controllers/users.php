@@ -7,9 +7,30 @@ class Users extends Custom_REST_Controller {
 	function index_get() {
 		$this->load->database();
 
+		$this->session_start_from_headers();
+		$session_data = $this->get_session_data();
+		$current_user = $this->get_user_from_db($session_data['user_id']);
+
 		$user_id = $this->get('id');
+
 		if (empty($user_id)) {
-			$this->json_output(array(), 404);
+			$users = [];
+			$banned_users = [];
+
+			if ( ! empty($current_user) && $current_user['type'] == 'admin') {
+				$query = $this->db->query("SELECT * FROM user ORDER BY id");
+				foreach ($query->result_array() as $row) {
+					unset($row['password']);
+					$users[] = $row;
+				}
+
+				$query = $this->db->query("SELECT user_id as id, datetime FROM banned_user ORDER BY user_id");
+				foreach ($query->result_array() as $row) {
+					$banned_users[] = $row;
+				}
+			}
+
+			$this->json_output(array('users' => $users, 'banned_users' => $banned_users));
 			return;
 		}
 

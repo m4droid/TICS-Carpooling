@@ -10,10 +10,19 @@
         <ul class="nav nav-pills pull-right">
           <li><div class="greetings">Hola {{current_session.user_id || 'Anonimo'}}</div></li>
           <li><a href="#/why_carpooling">¿Por qué carpooling?</a></li>
-          <li><a href="#/journeys">Recorridos</a></li>
-          <li ng-show="current_session.user_id"><a href="#/journeys/mine">Mis recorridos</a></li>
+          <li ng-show="current_user_data.type == 'admin'">
+            <a href="#/journeys">Administrar Recorridos</a>
+          </li>
+          <li ng-hide="current_user_data.type == 'admin'">
+            <a href="#/journeys">Recorridos</a>
+          </li>
+          <li ng-show="current_user_data.type != 'admin' && current_session.user_id">
+            <a href="#/journeys/mine">Mis recorridos</a>
+          </li>
           <li><a href="#/top3">Top 3</a></li>
           <li ng-show="current_session.user_id"><a href="#/profiles/{{current_session.user_id}}">Mi perfil</a></li>
+
+          <li ng-show="current_user_data.type == 'admin'"><a href="#/users">Administrar Usuarios</a></li>
 
           <li ng-hide="current_session.user_id"><a href="#/register">Registrarse</a></li>
           <li ng-hide="current_session.user_id"><a href="#/login">Entrar</a></li>

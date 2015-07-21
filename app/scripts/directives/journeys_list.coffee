@@ -8,14 +8,14 @@
  # Directive of the carpoolingApp
 ###
 angular.module 'carpoolingApp'
-  .directive 'journeysList', () ->
+  .directive 'journeysList', ->
     restrict: 'AE',
     scope:
       filterBy: '='
       currentUser: '='
     templateUrl: 'views/directives/journeys_list.html'
     link: (scope) ->
-      scope.$on('updated_journeys', () ->
+      scope.$on('updated_journeys', ->
         scope.load_journeys()
       )
       return
@@ -104,11 +104,28 @@ angular.module 'carpoolingApp'
           return
         return
 
-      $scope.load_journeys = () ->
+      $scope.load_journeys = ->
         $http({method: 'GET', url: API.url + '/journeys'})
           .success (data, status, headers, config) ->
             $scope.journeys = data
             return
+        return
+
+      $scope.confirm_delete_journey = (journey_id) ->
+        $scope.modal_journeys_delete_id = journey_id
+
+      $scope.delete_journey = (journey_id) ->
+        AuthService.get_session_id()
+          .then (session_id) ->
+            $http(
+              method: 'DELETE',
+              url: API.url + '/journeys/?id=' + journey_id,
+              headers: {'Authorization': 'Token token=' + session_id},
+            ).success (data, status, headers, config) ->
+              $scope.load_journeys()
+              return
+            return
+          return
         return
 
       $scope.journeys = []

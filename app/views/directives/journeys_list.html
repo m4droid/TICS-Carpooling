@@ -1,3 +1,16 @@
+<div id="modal_journeys_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_ban">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div>¿Estás seguro de querer borrar el recorrido '{{modal_journeys_delete_id}}'</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="delete_journey(modal_journeys_delete_id)">Borrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="table-responsive journey_list">
   <table class="table" ts-wrapper>
     <thead>
@@ -11,8 +24,9 @@
         <th>Estilos musicales</th>
         <th>Pasajeros</th>
         <th>Likes</th>
-        <th></th>
-        <th></th>
+        <th ng-hide="currentUser.type == 'admin'"></th>
+        <th ng-hide="currentUser.type == 'admin'"></th>
+        <th ng-show="current_user_data.type == 'admin'"></th>
       </tr>
     </thead>
     <tbody>
@@ -42,20 +56,26 @@
           </ul>          
         </td>
         <td class="vert-align justify_center">{{journey.likes.length || 0}}</td>
-        <td class="vert-align">
-          <button class="btn btn-primary btn-xs" ng-click="join_journey(journey.id)" ng-hide="! currentUser || journey.user_id == currentUser || journey.passengers.indexOf(currentUser) >= 0 && journey.passengers.length < journey.seats">
+        <td class="vert-align" ng-hide="currentUser.type == 'admin'">
+          <button class="btn btn-primary btn-xs" ng-click="join_journey(journey.id)" ng-hide="! currentUser.id || journey.user_id == currentUser.id || journey.passengers.indexOf(currentUser.id) >= 0 && journey.passengers.length < journey.seats">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </button>
-          <button class="btn btn-primary btn-xs" ng-click="leave_journey(journey.id)" ng-hide="! currentUser || journey.user_id == currentUser || journey.passengers.indexOf(currentUser) < 0">
+          <button class="btn btn-primary btn-xs" ng-click="leave_journey(journey.id)" ng-hide="! currentUser.id || journey.user_id == currentUser.id || journey.passengers.indexOf(currentUser.id) < 0">
             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
           </button>
         </td>
-        <td class="vert-align">
-          <button class="btn btn-primary btn-xs" ng-click="like_journey(journey.id)" ng-hide="! currentUser || journey.likes.indexOf(currentUser) >= 0">
+        <td class="vert-align" ng-hide="currentUser.type == 'admin'">
+          <button class="btn btn-primary btn-xs" ng-click="like_journey(journey.id)" ng-hide="! currentUser.id || journey.likes.indexOf(currentUser.id) >= 0">
             <i class="fa fa-thumbs-up fa_icon" aria-hidden="true"></i>
           </button>
-          <button class="btn btn-primary btn-xs" ng-click="unlike_journey(journey.id)" ng-hide="! currentUser || journey.likes.indexOf(currentUser) < 0">
+          <button class="btn btn-primary btn-xs" ng-click="unlike_journey(journey.id)" ng-hide="! currentUser.id || journey.likes.indexOf(currentUser.id) < 0">
             <i class="fa fa-thumbs-down fa_icon" aria-hidden="true"></i>
+          </button>
+
+        </td>
+        <td class="vert-align" ng-show="currentUser.type == 'admin'">
+          <button class="btn btn-danger btn-xs" ng-click="confirm_delete_journey(journey.id)" data-toggle="modal" data-target="#modal_journeys_delete">
+            <i class="fa fa-trash fa_icon" aria-hidden="true"></i>
           </button>
         </td>
       </tr>

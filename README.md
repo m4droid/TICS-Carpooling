@@ -30,3 +30,5 @@ Windows 7: XAMPP 5.6.0-0 con Chrome e IE 11
 * Uso de alerts para las notificaciones de acciones
 * Navbar
 * Botones varios
+* Modal al banear un usuario
+

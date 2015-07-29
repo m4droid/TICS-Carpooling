@@ -18,6 +18,7 @@ Windows 7: XAMPP 5.6.0-0 con Chrome e IE 11
 * Los usuarios / contraseñas de prueba son:
   - user / passpass
   - user2 / passpass2
+  - admim / adminadmin
 
 * La carpeta backend/avatars debe tener permisos de lectura, escritura y ejecución para todos los usuarios (chmod 777)
 

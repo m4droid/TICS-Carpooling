@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.24, for osx10.9 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.25, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: tarea3grupo23
 -- ------------------------------------------------------
@@ -16,14 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `tarea3grupo23`
+-- Table structure for table `banned_user`
 --
 
-/*!40000 DROP DATABASE IF EXISTS `tarea3grupo23`*/;
+DROP TABLE IF EXISTS `banned_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `banned_user` (
+  `user_id` varchar(32) NOT NULL,
+  `datetime` datetime NOT NULL,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_banned_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tarea3grupo23` /*!40100 DEFAULT CHARACTER SET utf8 */;
+--
+-- Dumping data for table `banned_user`
+--
 
-USE `tarea3grupo23`;
+LOCK TABLES `banned_user` WRITE;
+/*!40000 ALTER TABLE `banned_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `banned_user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `journey`
@@ -42,7 +56,7 @@ CREATE TABLE `journey` (
   PRIMARY KEY (`id`),
   KEY `fk_journey_user_idx` (`user_id`),
   CONSTRAINT `fk_journey_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,6 +93,33 @@ LOCK TABLES `journey_day` WRITE;
 /*!40000 ALTER TABLE `journey_day` DISABLE KEYS */;
 INSERT INTO `journey_day` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(2,1),(2,2),(2,4),(2,5);
 /*!40000 ALTER TABLE `journey_day` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `journey_like`
+--
+
+DROP TABLE IF EXISTS `journey_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `journey_like` (
+  `journey_id` int(11) NOT NULL,
+  `user_id` varchar(32) NOT NULL,
+  `datetime` datetime NOT NULL,
+  PRIMARY KEY (`journey_id`,`user_id`),
+  KEY `fk_like_user_idx` (`user_id`),
+  CONSTRAINT `fk_like_journey` FOREIGN KEY (`journey_id`) REFERENCES `journey` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_like_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `journey_like`
+--
+
+LOCK TABLES `journey_like` WRITE;
+/*!40000 ALTER TABLE `journey_like` DISABLE KEYS */;
+/*!40000 ALTER TABLE `journey_like` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -147,6 +188,7 @@ CREATE TABLE `user` (
   `id` varchar(32) NOT NULL,
   `password` varchar(40) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `type` varchar(16) NOT NULL DEFAULT 'user',
   `phone_number` varchar(64) NOT NULL,
   `first_name` varchar(32) NOT NULL,
   `last_name` varchar(32) NOT NULL,
@@ -167,7 +209,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('user','afeebf697ba6fc217e041b1d95c8c8ccd7403ba7','user@user.com','+5691234567890','Juan','Perez','1990-01-01','M','2015-05-14 22:21:12','user.png','Texto de prueba de user','2015-05-14 22:31:50'),('user2','81de223b7791432efbc93f2cf11310e8f912f7f5','user2@user2.com','+5681234567890','Juana','Perez','1989-12-12','F','2015-05-14 22:23:01','user2.png','Texto de prueba de user2','2015-05-14 22:31:40');
+INSERT INTO `user` VALUES ('admin','1d202819a512d69a905a1a2851cec7dec6dbbb19','admin@admin.com','admin','+5691234567892','Admin','Carpooling','1990-02-16','M','2015-05-14 22:21:12','admin.png','Texto de prueba de admin','2015-07-29 00:36:38'),('user','afeebf697ba6fc217e041b1d95c8c8ccd7403ba7','user@user.com','user','+5691234567891','Juan','Perez','2000-02-16','M','2015-05-14 22:21:12','user.png','Texto de prueba de user','2015-07-21 15:44:20'),('user2','81de223b7791432efbc93f2cf11310e8f912f7f5','user2@user2.com','user','+5681234567890','Juana','Perez','1989-12-12','F','2015-05-14 22:23:01','user2.png','Texto de prueba de user2','2015-07-21 12:36:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -180,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-14 22:54:55
+-- Dump completed on 2015-07-29  0:45:19

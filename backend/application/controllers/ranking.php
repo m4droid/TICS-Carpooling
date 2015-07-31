@@ -24,9 +24,10 @@ class Ranking extends Custom_REST_Controller {
 				LEFT JOIN journey_passenger AS p ON p.journey_id = j.id
 				JOIN (SELECT COUNT(*) AS total_journeys FROM journey) AS tj
 				JOIN (SELECT SUM(seats) AS total_seats FROM journey) AS ts
+			WHERE u.type != 'admin'
 			GROUP BY u.id
 			ORDER BY ranking DESC
-			LIMIT 10
+			LIMIT 3
 		");
 
 		$rank = 1;

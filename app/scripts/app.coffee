@@ -64,7 +64,6 @@ angular
     localStorageServiceProvider.setPrefix 'carpoolingApp'
   .run ($rootScope, $http, AuthService) ->
     AuthService.get_session_id()
-  .run ($location, $rootScope) ->
     $rootScope.$on '$routeChangeSuccess', (event, current, previous) ->
       if current.$$route?
         $rootScope.title = current.$$route.title

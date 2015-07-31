@@ -19,13 +19,13 @@ angular.module 'carpoolingApp'
       avatar_file = element.files[0]
       reader = new FileReader()
       reader.onload = (event) ->
-        $scope.$apply () ->
+        $scope.$apply ->
           $scope.profile_user.avatar = event.currentTarget.result
       if avatar_file?
         reader.readAsDataURL(avatar_file)
       return
 
-    $scope.form_profile_send = () ->
+    $scope.form_profile_send = ->
       $scope.alerts = []
 
       new_profile = angular.copy($scope.profile_user)
@@ -65,11 +65,11 @@ angular.module 'carpoolingApp'
       $location.path "/profiles/" + $scope.current_session.profile_user_id
 
     $scope.profile_user = {}
-    $scope.is_new_profile = $scope.profile_user.id == $scope.current_session.user_id
 
     $http({method: 'GET', url: API.url + '/users', params: {id: $scope.profile_user_id}})
       .success (data, status, headers, config) ->
         $scope.profile_user = data
+        $scope.is_new_profile = $scope.profile_user.id == $scope.current_session.user_id
         $scope.set_avatar_path()
         return
     return

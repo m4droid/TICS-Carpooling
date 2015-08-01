@@ -62,8 +62,11 @@ angular
       .otherwise
         redirectTo: '/journeys'
     localStorageServiceProvider.setPrefix 'carpoolingApp'
+    return
   .run ($rootScope, $http, AuthService) ->
     AuthService.get_session_id()
     $rootScope.$on '$routeChangeSuccess', (event, current, previous) ->
       if current.$$route?
         $rootScope.title = current.$$route.title
+      return
+    return

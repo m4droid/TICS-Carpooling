@@ -36,7 +36,7 @@
         <input id="form_profile_email" class="form-control" type="email" name="email" ng-model="profile_user.email" placeholder="juan@perez.com" ng-show="profile_user_id == current_session.user_id" ng-required="true" />
       </div>
     </div>
-    <div class="form-group" ng-show="is_new_profile">
+    <div class="form-group" ng-show="password_show">
       <div class="col-sm-3 form_col_justify_right">
         <label for="form_profile_password" class="control_label_required">Password</label>
         <div class="control_label_validation">
@@ -47,7 +47,7 @@
       </div>
       <div class="col-sm-9">
         <div class="form_profile_no_input" ng-hide="profile_user_id == current_session.user_id">{{profile_user.password}}</div>
-        <input id="form_profile_password" class="form-control" type="password" maxlength="16" name="password" ng-model="profile_user.password" ng-show="profile_user_id == current_session.user_id" ng-required="is_new_profile" ng-minlength="8" ng-maxlength="16" />
+        <input id="form_profile_password" class="form-control" type="password" maxlength="16" name="password" ng-model="profile_user.password" ng-show="profile_user_id == current_session.user_id" ng-required="password_required" ng-minlength="8" ng-maxlength="16" />
       </div>
     </div>
     <div class="form-group">

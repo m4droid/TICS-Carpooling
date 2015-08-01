@@ -9,22 +9,17 @@
 ###
 angular.module 'carpoolingApp'
   .controller 'RegisterCtrl', ($scope, $routeParams, $http, $location, API) ->
-    if $scope.is_user_logged_in()
-      $location.path "/"
-      return
-
-    $scope.is_new_profile = true
-    $scope.profile_user = {}
-    $scope.max_date = moment().subtract(18, 'years')
-
     $scope.avatar_changed = (element) ->
       avatar_file = element.files[0]
       reader = new FileReader()
       reader.onload = (event) ->
         $scope.$apply () ->
           $scope.profile_user.avatar = event.currentTarget.result
+          return
+        return
       if avatar_file?
         reader.readAsDataURL(avatar_file)
+      return
 
     $scope.form_profile_send = () ->
       $scope.alerts = []
@@ -47,5 +42,12 @@ angular.module 'carpoolingApp'
     $scope.open = (event) ->
       event.preventDefault()
       event.stopPropagation()
-
       $scope.opened = true;
+      return
+
+    $scope.is_new_profile = true
+    $scope.password_show = true
+    $scope.password_required = true
+    $scope.profile_user = {}
+    $scope.max_date = moment().subtract(18, 'years')
+    return

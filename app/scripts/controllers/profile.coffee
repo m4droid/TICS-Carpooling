@@ -21,6 +21,8 @@ angular.module 'carpoolingApp'
       reader.onload = (event) ->
         $scope.$apply ->
           $scope.profile_user.avatar = event.currentTarget.result
+          return
+        return
       if avatar_file?
         reader.readAsDataURL(avatar_file)
       return
@@ -56,6 +58,7 @@ angular.module 'carpoolingApp'
       event.preventDefault()
       event.stopPropagation()
       $scope.opened = true;
+      return
 
     if not $scope.is_user_logged_in()
       return
@@ -69,7 +72,9 @@ angular.module 'carpoolingApp'
     $http({method: 'GET', url: API.url + '/users', params: {id: $scope.profile_user_id}})
       .success (data, status, headers, config) ->
         $scope.profile_user = data
-        $scope.is_new_profile = $scope.profile_user.id == $scope.current_session.user_id
+        $scope.is_new_profile = $scope.profile_user.id != $scope.current_session.user_id
+        $scope.password_show = $scope.profile_user.id == $scope.current_session.user_id
+        $scope.password_required = $scope.profile_user.id != $scope.current_session.user_id
         $scope.set_avatar_path()
         return
     return

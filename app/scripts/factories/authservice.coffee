@@ -39,6 +39,7 @@ angular.module 'carpoolingApp'
       $q (resolve, reject) ->
         if not Session.id?
           reject()
+          return
 
         $http(
           method: 'DELETE',
@@ -48,8 +49,11 @@ angular.module 'carpoolingApp'
           Session.destroy()
           $rootScope.current_session = undefined
           resolve()
+          return
         .error (data, status, headers, config) ->
           reject()
+          return
+        return
     check_session: ->
       if Session.id?
         $http(
@@ -61,3 +65,4 @@ angular.module 'carpoolingApp'
             Session.destroy()
             $rootScope.current_session = undefined
           return
+        return

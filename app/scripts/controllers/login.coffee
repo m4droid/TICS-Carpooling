@@ -9,6 +9,7 @@
 ###
 angular.module 'carpoolingApp'
   .controller 'LoginCtrl', ($scope) ->
-
     $scope.form_login_submit = () ->
       $scope.login $scope.username, $scope.password
+      return
+    return

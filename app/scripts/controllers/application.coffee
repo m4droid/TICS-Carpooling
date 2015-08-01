@@ -20,8 +20,11 @@ angular.module 'carpoolingApp'
         .then (user) ->
           $rootScope.current_session = user
           $location.path "/paths"
+          return
         , (alerts) ->
           $scope.alerts = alerts
+          return
+      return
 
     $scope.logout = ->
       $scope.global_alerts = []
@@ -29,6 +32,7 @@ angular.module 'carpoolingApp'
         .then (status) ->
           $location.path "/"
           return
+      return
 
     $scope.redirect_to_home = ->
       $location.path "/"
@@ -38,3 +42,4 @@ angular.module 'carpoolingApp'
       $scope.current_user_data? and $scope.current_user_data.type == 'admin'
 
     AuthService.check_session()
+    return

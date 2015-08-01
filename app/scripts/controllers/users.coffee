@@ -25,6 +25,7 @@ angular.module 'carpoolingApp'
     $scope.confirm_ban = (action, user_id) ->
       $scope.modal_action = action
       $scope.modal_ban_user = user_id
+      return
 
     $scope.ban_user = (user_id) ->
       AuthService.get_session_id()

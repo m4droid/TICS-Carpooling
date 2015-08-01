@@ -17,6 +17,7 @@ angular.module 'carpoolingApp'
     link: (scope) ->
       scope.$on('updated_journeys', ->
         scope.load_journeys()
+        return
       )
       return
     controller: ['$scope', '$http', 'AuthService', 'API', ($scope, $http, AuthService, API) ->
@@ -113,6 +114,7 @@ angular.module 'carpoolingApp'
 
       $scope.confirm_delete_journey = (journey_id) ->
         $scope.modal_journeys_delete_id = journey_id
+        return
 
       $scope.delete_journey = (journey_id) ->
         AuthService.get_session_id()
